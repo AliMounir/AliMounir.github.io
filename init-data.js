@@ -8,7 +8,8 @@ var jcontent =  {
   "phone"       : "+201098847771",
   "insta"       : "_alimounir",
   "github"      : "AliMounir",
-  "about-me"    : "I'm a highly-motivated Engineering student with a massive passion for everything digital, computerzied and content creation related. I love playing all kinds of sports and spend a lot of my free time learning new skills. My bucket-list consists of plenty of travel destinations."
+  "about-me"    : "I'm a highly-motivated Engineering student with a massive passion for everything digital, computerzied and content creation related. I love playing all kinds of sports and spend a lot of my free time learning new skills. My bucket-list consists of plenty of travel destinations.",
+  "test"        : "test"
 };
 
 var newName = document.getElementById('name');
