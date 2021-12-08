@@ -1,0 +1,25 @@
+<script>
+    var i = 0;
+
+function addBullet() {
+  console.log(i);
+  i++;
+  console.log(i);
+  $("#modal-new-bullet").append('<li class="w3-display-container" id="new-field-' + i + '"><label for="name">New Field 0' + i + '</label><input class="w3-input" type="text"><span onclick="removeField()" class="w3-button w3-display-right">&times;</span></li>');
+  $(".profile-info").append('<p id="field-' + i + '"><i class="fa fa-dot-circle-o fa-fw w3-margin-right w3-large w3-text-blue"></i></p>');
+  //
+}
+
+$("#add-button").on('click',addBullet);
+
+function removeField() {
+  
+  document.getElementById("new-field-" + i).remove();
+  document.getElementById("field-" + i).remove();
+  i--;
+
+}
+  </script>
+
+
+<span onclick="this.parentElement.style.display='none'" class="w3-button w3-display-right">&times;</span>
