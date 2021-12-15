@@ -462,8 +462,9 @@
 
     <div id="showmodal"
       class="w3-button w3-display-bottomright w3-margin-right w3-margin-bottom w3-blue w3-round-xxlarge"
-      style="position: fixed;" onclick="document.getElementById('modal-container').style.display='block'"><i
-        class="w3-padding-small w3-large fa fa-pencil"></i></div>
+      style="position: fixed;" <!--onclick="document.getElementById('modal-container').style.display='block'"-->
+      <a class="w3-padding-small w3-large fa fa-pencil" href="http://localhost:8081/resume-editor/register" style="text-decoration: none;"></a>
+    </div>
 
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
@@ -565,6 +566,13 @@
           x.className = x.className.replace(" w3-show", "");
         }
       }
+    </script>
+
+    <script>
+      function createResume() {
+        var basicUserData;
+      }
+
     </script>
 
 
