@@ -11,35 +11,70 @@
 
 <body>
     <h1>Edit Form</h1>
-    <form action="<%= request.getContextPath() %>/register" method="post">
-		<table style="width: 80%">
-			<tr>
-			<td>First Name</td>
-			<td><input type="text" name="firstName"></td>
-			</tr>
-			<tr>
-			<td>Last Name</td>
-			<td><input type="text" name="lastName"></td>
-			</tr>
-			<tr>
-			<td>Username</td>
-			<td><input type="text" name="username"></td>
-			</tr>
-			<tr>
-			<td>Password</td>
-			<td><input type="password" name="password"></td>
-			</tr>
-			<tr>
-			<td>Address</td>
-			<td><input type="text" name="address"></td>
-			</tr>
-			<tr>
-			<td>Contact</td>
-			<td><input type="text" name="contact"></td>
-			</tr>
-		</table>
-		<input type="submit" value="Submit!">
-		</form>
+    <form id="editor-form">
+        <table style="width: 80%">
+            <tr>
+                <td>Name</td>
+                <td><input type="text" name="name"></td>
+            </tr>
+            <tr>
+                <td>Last Name</td>
+                <td><input type="text" name="lastName"></td>
+            </tr>
+            <tr>
+                <td>Username</td>
+                <td><input type="text" name="username"></td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td><input type="password" name="password"></td>
+            </tr>
+            <tr>
+                <td>Address</td>
+                <td><input type="text" name="address"></td>
+            </tr>
+            <tr>
+                <td>Contact</td>
+                <td><input type="text" name="contact"></td>
+            </tr>
+        </table>
+        <input type="submit" value="Submit!">
+    </form>
 </body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+<script>
+
+    $("#editor-form").on('submit', function (e) {
+
+
+        e.preventDefault(); // avoid to execute the actual submit of the form.
+
+        let form = $(this);
+
+        $.ajax({
+            url: "http://localhost:8081/resume-editor/register",
+            data: form.serialize(),
+            type: 'POST',
+            crossDomain: true,
+            // dataType: 'application/json', // added data type
+            // headers: {
+            //     'Access-Control-Allow-Origin': '*',
+            //   },
+            success: function (res) {
+                console.log(res);
+                alert(res);
+            },
+            error: function (res) {
+                console.log(res);
+            }
+        })
+    });
+
+</script>
 
 </html>

@@ -1,6 +1,7 @@
 package com.mounir.editor.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -36,7 +37,7 @@ public class UserDataServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/editor.html");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/EntryForm.xhtml");
 		dispatcher.forward(request, response);
 	}
 
@@ -44,6 +45,9 @@ public class UserDataServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		int userId = 0;
+		
 		
 
 		String name = request.getParameter("name");
@@ -60,14 +64,19 @@ public class UserDataServlet extends HttpServlet {
 		user.setEmail(email);
 		
 		try {
-			userDao.registerUser(user);
+			userId = userDao.registerUser(user);
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/edit-success.html");
-		dispatcher.forward(request, response);
+		
+		response.addHeader("Access-Control-Allow-Origin", "*");
+		response.setStatus(200);
+		PrintWriter pw = response.getWriter();
+//		pw.append("Served at: ").append(request.getContextPath());
+		pw.print(userId);
+
 	}
 
 }

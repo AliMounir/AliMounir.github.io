@@ -463,7 +463,7 @@
     <div id="showmodal"
       class="w3-button w3-display-bottomright w3-margin-right w3-margin-bottom w3-blue w3-round-xxlarge"
       style="position: fixed;" <!--onclick="document.getElementById('modal-container').style.display='block'"-->
-      <a class="w3-padding-small w3-large fa fa-pencil" href="http://localhost:8081/resume-editor/register" style="text-decoration: none;"></a>
+      <a class="w3-padding-small w3-large fa fa-pencil" onclick="openEditor()" style="text-decoration: none;"></a>
     </div>
 
 
@@ -473,6 +473,10 @@
 
 
     <script>
+
+      function openEditor() {
+        window.location.href = "editor.html";
+      }
 
 
       $("#ajax").on('click', function(){
@@ -490,6 +494,17 @@
         }
         })
       });
+
+
+      $.ajax({
+        url: "http://localhost:8081/resume-editor/getUsers",
+        type: 'GET',
+        crossDomain: true,
+        success: function (res) {
+          console.log(res);
+          alert(res);
+        }
+        })
 
     </script>
 
@@ -540,6 +555,59 @@
 
 
     <script src="init-data.js"></script>
+
+    <script>
+
+      // function loadUser() {
+      //   const request = new XMLHttpRequest();
+      //   // Access-Control-Allow-Origin *
+
+      //   // request.Header('Access-Control-Allow-Origin', '*');
+      //   request.open("get", "../backend/user-ali.json");
+      //   // request.withCredentials = true;
+      //   // request.setRequestHeader('Access-Control-Allow-Origin', '*');
+      //   request.onload = () => {
+      //     try {
+      //       const json = JSON.parse(request.responseText);
+      //       populateUser(json);
+      //     } catch (e) {
+      //       console.warn("Could not load user!");
+      //     }
+      //   };
+
+      //   request.send(); 
+      // }
+
+
+      function populateUser(json) {
+        console.log(json);
+        var newName = document.getElementById('name');
+        newName.innerHTML = "&nbsp;" + json.name + "&nbsp;";
+
+        var newJob = document.getElementById('job');
+        newJob.innerHTML = "<i class='fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-blue'></i>" + json.job;
+
+        var newAddress = document.getElementById('address');
+        newAddress.innerHTML = "<i class='fa fa-home fa-fw w3-margin-right w3-large w3-text-blue'></i>" + json.address;
+
+        var newBirthdate = document.getElementById('birthdate');
+        newBirthdate.innerHTML = "<i class='fa fa-birthday-cake fa-fw w3-margin-right w3-large w3-text-blue'></i>" + json.birthdate;
+
+        var newEmail = document.getElementById('email');
+        newEmail.innerHTML = "<i class='fa fa-envelope fa-fw w3-margin-right w3-large w3-text-blue'></i>" + json.email;
+
+        var newPhone = document.getElementById('phone');
+        newPhone.innerHTML = "<i class='fa fa-phone fa-fw w3-margin-right w3-large w3-text-blue'></i>" + json.phone;
+
+        var newInsta = document.getElementById('insta');
+        newInsta.innerHTML = "<i class='fa fa-instagram fa-fw w3-margin-right w3-large w3-text-blue'></i>@" + json.insta;
+
+        var newGithub = document.getElementById('github');
+        newGithub.innerHTML = "<i class='fa fa-code-fork fa-fw w3-margin-right w3-large w3-text-blue'></i>github.com/" + json.github;
+      }
+
+
+    </script>
 
     <script>
       document.getElementsByClassName("tablink")[0].click();
