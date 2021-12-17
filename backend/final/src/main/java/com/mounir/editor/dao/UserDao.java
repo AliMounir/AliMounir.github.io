@@ -14,8 +14,8 @@ import com.mounir.editor.model.User;
 public class UserDao {
 
 	public int registerUser(User user) throws ClassNotFoundException {
-		String INSERT_USERS_SQL = "INSERT INTO user" + " (name, job, birthDate, address, email) VALUES "
-				+ " (?, ?, ?, ?, ?);";
+		String INSERT_USERS_SQL = "INSERT INTO user " + "(name, job, address, birthDate, email, number, insta, github, aboutMe) VALUES "
+				+ " (?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
 		int result = 0;
 		int i = 0;
@@ -31,9 +31,13 @@ public class UserDao {
 //				preparedStatement.setInt(1,  i++);
 			preparedStatement.setString(1, user.getName());
 			preparedStatement.setString(2, user.getJob());
-			preparedStatement.setString(3, user.getBirthDate());
-			preparedStatement.setString(4, user.getAddress());
+			preparedStatement.setString(3, user.getAddress());
+			preparedStatement.setString(4, user.getBirthDate());
 			preparedStatement.setString(5, user.getEmail());
+			preparedStatement.setString(6, user.getNumber());
+			preparedStatement.setString(7, user.getInsta());
+			preparedStatement.setString(8, user.getGithub());
+			preparedStatement.setString(9, user.getAboutMe());
 
 			System.out.println(preparedStatement);
 
@@ -54,6 +58,7 @@ public class UserDao {
 	}
 
 	public List<User> getUsers() {
+
 
 		String SQL_SELECT = "SELECT * FROM user";
 
@@ -82,9 +87,14 @@ public class UserDao {
 				int id = resultSet.getInt("id");
 				String name = resultSet.getString("name");
 				String job = resultSet.getString("job");
-				String birthDate = resultSet.getString("birthDate");
 				String address = resultSet.getString("address");
+				String birthDate = resultSet.getString("birthDate");
 				String email = resultSet.getString("email");
+				String number = resultSet.getString("number");
+				String insta = resultSet.getString("insta");
+				String github = resultSet.getString("github");
+				String aboutMe = resultSet.getString("aboutMe");
+
 
 				User obj = new User();
 				obj.setId(id);
@@ -93,6 +103,11 @@ public class UserDao {
 				obj.setBirthDate(birthDate);
 				obj.setAddress(address);
 				obj.setEmail(email);
+				obj.setNumber(number);
+				obj.setInsta(insta);
+				obj.setGithub(github);
+				obj.setAboutMe(aboutMe);
+
 				
 				users.add(obj);
 
@@ -106,4 +121,64 @@ public class UserDao {
 		return users;
 	}
 
+	public User getDefaultUser() {
+
+
+		String SQL_SELECT = "SELECT * FROM user WHERE name='Ali Mounir'";
+
+		int result = 0;
+		int i = 0;
+		int lastInsertedId = 0;
+
+		User obj = new User();
+
+
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/employees?useSSL=false",
+				"root", "sql123456")) {
+
+			PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT);
+
+			ResultSet resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+
+				int id = resultSet.getInt("id");
+				String name = resultSet.getString("name");
+				String job = resultSet.getString("job");
+				String address = resultSet.getString("address");
+				String birthDate = resultSet.getString("birthDate");
+				String email = resultSet.getString("email");
+				String number = resultSet.getString("number");
+				String insta = resultSet.getString("insta");
+				String github = resultSet.getString("github");
+				String aboutMe = resultSet.getString("aboutMe");
+
+
+				obj.setId(id);
+				obj.setName(name);
+				obj.setJob(job);
+				obj.setBirthDate(birthDate);
+				obj.setAddress(address);
+				obj.setEmail(email);
+				obj.setNumber(number);
+				obj.setInsta(insta);
+				obj.setGithub(github);
+				obj.setAboutMe(aboutMe);
+
+			}
+
+		} catch (SQLException e) {
+			// process sql exception
+			e.printStackTrace();
+		}
+
+		return obj;
+	}
 }

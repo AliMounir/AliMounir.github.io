@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<title>Resume - Ali Mounir</title>
+<title>Resume Editor</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" type="image/png" href="favicon.png">
@@ -14,28 +14,40 @@
     <form id="editor-form">
         <table style="width: 80%">
             <tr>
-                <td>Name</td>
+                <td>Full Name</td>
                 <td><input type="text" name="name"></td>
             </tr>
             <tr>
-                <td>Last Name</td>
-                <td><input type="text" name="lastName"></td>
-            </tr>
-            <tr>
-                <td>Username</td>
-                <td><input type="text" name="username"></td>
-            </tr>
-            <tr>
-                <td>Password</td>
-                <td><input type="password" name="password"></td>
+                <td>Job</td>
+                <td><input type="text" name="job"></td>
             </tr>
             <tr>
                 <td>Address</td>
                 <td><input type="text" name="address"></td>
             </tr>
             <tr>
-                <td>Contact</td>
-                <td><input type="text" name="contact"></td>
+                <td>Date of Birth</td>
+                <td><input type="text" name="birthDate"></td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td><input type="text" name="email"></td>
+            </tr>
+            <tr>
+                <td>Phone Number</td>
+                <td><input type="text" name="number"></td>
+            </tr>
+            <tr>
+                <td>Instagram</td>
+                <td><input type="text" name="insta"></td>
+            </tr>
+            <tr>
+                <td>Github</td>
+                <td><input type="text" name="github"></td>
+            </tr>
+            <tr>
+                <td>About Me</td>
+                <td><textarea name="aboutMe" rows="4" cols="50"></textarea></td>
             </tr>
         </table>
         <input type="submit" value="Submit!">
@@ -61,10 +73,7 @@
             data: form.serialize(),
             type: 'POST',
             crossDomain: true,
-            // dataType: 'application/json', // added data type
-            // headers: {
-            //     'Access-Control-Allow-Origin': '*',
-            //   },
+
             success: function (res) {
                 console.log(res);
                 alert(res);

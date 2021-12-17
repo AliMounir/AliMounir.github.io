@@ -462,7 +462,7 @@
 
     <div id="showmodal"
       class="w3-button w3-display-bottomright w3-margin-right w3-margin-bottom w3-blue w3-round-xxlarge"
-      style="position: fixed;" <!--onclick="document.getElementById('modal-container').style.display='block'"-->
+      style="position: fixed;" <!--onclick="document.getElementById('modal-container').style.display='block'" -->
       <a class="w3-padding-small w3-large fa fa-pencil" onclick="openEditor()" style="text-decoration: none;"></a>
     </div>
 
@@ -479,32 +479,70 @@
       }
 
 
-      $("#ajax").on('click', function(){
-       $.ajax({
-        url: "http://localhost:8081/banana-server/createUser",
-        type: 'GET',
-        crossDomain: true,
-        dataType: 'application/json', // added data type
-        // headers: {
-        //     'Access-Control-Allow-Origin': '*',
-        //   },
-        success: function (res) {
-          console.log(res);
-          alert(res);
-        }
-        })
-      });
+      // $("#ajax").on('click', function(){
+      //  $.ajax({
+      //   url: "http://localhost:8081/banana-server/createUser",
+      //   type: 'GET',
+      //   crossDomain: true,
+      //   dataType: 'application/json', // added data type
+      //   // headers: {
+      //   //     'Access-Control-Allow-Origin': '*',
+      //   //   },
+      //   success: function (res) {
+      //     console.log(res);
+      //     alert(res);
+      //   }
+      //   })
+      // });
+
+      //DIH SHAGHALA
+      // $.ajax({
+      //   url: "http://localhost:8081/resume-editor/getUsers",
+      //   type: 'GET',
+      //   crossDomain: true,
+      //   success: function (res) {
+      //     console.log(res);
+      //   }
+      //   })
 
 
+      //load default user - ali
       $.ajax({
-        url: "http://localhost:8081/resume-editor/getUsers",
+        url: "http://localhost:8081/resume-editor/getDefaultUser",
         type: 'GET',
         crossDomain: true,
         success: function (res) {
-          console.log(res);
-          alert(res);
+          console.log(JSON.parse(res));
+          var jcontent = JSON.parse(res);
+          var newName = document.getElementById('name');
+          newName.innerHTML = "&nbsp;" + jcontent.name + "&nbsp;";
+
+          var newJob = document.getElementById('job');
+          newJob.innerHTML = "<i class='fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-blue'></i>" + jcontent.job;
+
+          var newAddress = document.getElementById('address');
+          newAddress.innerHTML = "<i class='fa fa-home fa-fw w3-margin-right w3-large w3-text-blue'></i>" + jcontent.address;
+
+          var newBirthdate = document.getElementById('birthdate');
+          newBirthdate.innerHTML = "<i class='fa fa-birthday-cake fa-fw w3-margin-right w3-large w3-text-blue'></i>" + jcontent.birthDate;
+
+          var newEmail = document.getElementById('email');
+          newEmail.innerHTML = "<i class='fa fa-envelope fa-fw w3-margin-right w3-large w3-text-blue'></i>" + jcontent.email;
+
+          var newPhone = document.getElementById('phone');
+          newPhone.innerHTML = "<i class='fa fa-phone fa-fw w3-margin-right w3-large w3-text-blue'></i>" + jcontent.phone;
+
+          var newInsta = document.getElementById('insta');
+          newInsta.innerHTML = "<i class='fa fa-instagram fa-fw w3-margin-right w3-large w3-text-blue'></i>@" + jcontent.insta;
+
+          var newGithub = document.getElementById('github');
+          newGithub.innerHTML = "<i class='fa fa-code-fork fa-fw w3-margin-right w3-large w3-text-blue'></i>github.com/" + jcontent.github;
+
+          var newAboutMe = document.getElementById('about-me-text');
+          newAboutMe.innerHTML = jcontent.aboutMe;
         }
-        })
+      })
+
 
     </script>
 
@@ -554,7 +592,7 @@
   </script> -->
 
 
-    <script src="init-data.js"></script>
+    <!-- <script src="init-data.js"></script> -->
 
     <script>
 

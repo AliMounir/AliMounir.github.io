@@ -55,6 +55,10 @@ public class UserDataServlet extends HttpServlet {
 		String address = request.getParameter("address");
 		String birthDate = request.getParameter("birthDate");
 		String email = request.getParameter("email");
+		String number = request.getParameter("number");
+		String insta = request.getParameter("insta");
+		String github = request.getParameter("github");
+		String aboutMe = request.getParameter("aboutMe");
 
 		User user = new User();
 		user.setName(name);
@@ -62,6 +66,10 @@ public class UserDataServlet extends HttpServlet {
 		user.setAddress(address);
 		user.setBirthDate(birthDate);
 		user.setEmail(email);
+		user.setNumber(number);
+		user.setInsta(insta);
+		user.setGithub(github);
+		user.setAboutMe(aboutMe);
 		
 		try {
 			userId = userDao.registerUser(user);

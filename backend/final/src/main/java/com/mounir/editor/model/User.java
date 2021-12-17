@@ -8,9 +8,37 @@ public class User {
 	private String address;
 	private String birthDate;
 	private String email;
+	private String number;
+	private String insta;
+	private String github;
+	private String aboutMe;
 	
 
 	
+	public String getNumber() {
+		return number;
+	}
+	public void setNumber(String number) {
+		this.number = number;
+	}
+	public String getInsta() {
+		return insta;
+	}
+	public void setInsta(String insta) {
+		this.insta = insta;
+	}
+	public String getGithub() {
+		return github;
+	}
+	public void setGithub(String github) {
+		this.github = github;
+	}
+	public String getAboutMe() {
+		return aboutMe;
+	}
+	public void setAboutMe(String aboutMe) {
+		this.aboutMe = aboutMe;
+	}
 	public int getId() {
 		return id;
 	}
