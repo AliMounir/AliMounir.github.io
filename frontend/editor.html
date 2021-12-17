@@ -9,9 +9,19 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 
-<body>
+<body class="w3-margin-left">
     <h1>Edit Form</h1>
-    <form id="editor-form">
+
+    <div class="w3-bar w3-border-bottom">
+        <button class="tablink w3-bar-item w3-button" onclick="openTab(event, 'Profile')">Profile</button>
+        <button class="tablink w3-bar-item w3-button" onclick="openTab(event, 'Education')">Education</button>
+        <button class="tablink w3-bar-item w3-button" onclick="openTab(event, 'Work')">Work</button>
+        <button class="tablink w3-bar-item w3-button" onclick="openTab(event, 'OtherSkills')">Other Skills</button>
+        <button class="tablink w3-bar-item w3-button" onclick="openTab(event, 'Templates')">Templates</button>
+    </div>
+
+    <!-- PROFILE TAB -->
+    <form id="Profile" class="tab-modal">
         <table style="width: 80%">
             <tr>
                 <td>Full Name</td>
@@ -52,16 +62,80 @@
         </table>
         <input type="submit" value="Submit!">
     </form>
+
+    <!-- EDUCATION TAB -->
+    <form id="Education" class="tab-modal">
+        <table style="width: 80%">
+            <tr>
+                <td>Full Name</td>
+                <td><input type="text" name="name"></td>
+            </tr>
+            <tr>
+                <td>Job</td>
+                <td><input type="text" name="job"></td>
+            </tr>
+            <tr>
+                <td>Address</td>
+                <td><input type="text" name="address"></td>
+            </tr>
+            <tr>
+                <td>Date of Birth</td>
+                <td><input type="text" name="birthDate"></td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td><input type="text" name="email"></td>
+            </tr>
+            <tr>
+                <td>Phone Number</td>
+                <td><input type="text" name="number"></td>
+            </tr>
+            <tr>
+                <td>Instagram</td>
+                <td><input type="text" name="insta"></td>
+            </tr>
+            <tr>
+                <td>Github</td>
+                <td><input type="text" name="github"></td>
+            </tr>
+            <tr>
+                <td>About Me</td>
+                <td><textarea name="aboutMe" rows="4" cols="50"></textarea></td>
+            </tr>
+        </table>
+        <input type="submit" value="Submit!">
+    </form>
+
+    <!-- TEMPLATES TAB -->
+    <form id="Templates" class="tab-modal">
+        <p>Predefined Users:</p>
+        <p>Select a user from dropdown menu to load their resumé.</p>
+        <div class="w3-dropdown-click">
+            <button onclick="dropdown(), fillUsersDropDown()" class="w3-button w3-black" type="button">Saved users <i class="fa fa-caret-square-o-down"></i></button>
+            <div id="dropDown" class="w3-dropdown-content w3-bar-block w3-border">
+            <!-- placeholder for existing users to be loaded -->
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+        <input type="submit" value="Load User!">
+    </form>
+
 </body>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 
 <script>
 
-    $("#editor-form").on('submit', function (e) {
+    $("#Profile").on('submit', function (e) {
 
 
         e.preventDefault(); // avoid to execute the actual submit of the form.
@@ -83,6 +157,74 @@
             }
         })
     });
+
+</script>
+
+<script>
+    document.getElementsByClassName("tablink")[0].click();
+
+    function openTab(evt, tabName) {
+        var i, x, tablinks;
+        x = document.getElementsByClassName("tab-modal");
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablink");
+        for (i = 0; i < x.length; i++) {
+            tablinks[i].classList.remove("w3-light-grey");
+        }
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.classList.add("w3-light-grey");
+    }
+
+    function dropdown() {
+        var x = document.getElementById("dropDown");
+        if (x.className.indexOf("w3-show") == -1) {
+            x.className += " w3-show";
+        } else {
+            x.className = x.className.replace(" w3-show", "");
+        }
+    }
+
+    var usersArray;
+
+    $.ajax({
+        url: "http://localhost:8081/resume-editor/getUsers",
+        type: 'GET',
+        crossDomain: true,
+        success: function (res) {
+            usersArray = JSON.parse(res);
+            console.log(usersArray[0].id);
+        }
+    })
+
+    function fillUsersDropDown() {
+
+        for (let i in usersArray) {
+            $("#dropDown").append('<a onclick="selectedUser('+ usersArray[i].id + ')" class="w3-bar-item w3-button">' + usersArray[i].name + '</a>');
+        }
+
+    }
+
+
+    function selectedUser(userId) {
+        $.ajax({
+            url: "http://localhost:8081/resume-editor/getSelectedUser",
+            type: 'GET',
+            dataType: 'application/json',
+            data: { requestedId: userId},
+
+            success: function(data){
+                console.log("success ya basha");
+                window.location.href = "index.html?user=" + userId;
+            },
+
+            error: function(data){
+                console.log("failed ya basha");
+            }
+        });
+
+    }
 
 </script>
 

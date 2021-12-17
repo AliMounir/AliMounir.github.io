@@ -181,4 +181,66 @@ public class UserDao {
 
 		return obj;
 	}
+
+	public User getSelectedUser(String selectedId) {
+
+
+		String SQL_SELECT = "SELECT * FROM user WHERE id=" + selectedId;
+
+		int result = 0;
+		int i = 0;
+		int lastInsertedId = 0;
+
+		User obj = new User();
+
+
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/employees?useSSL=false",
+				"root", "sql123456")) {
+
+			PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT);
+
+			ResultSet resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+
+				int id = resultSet.getInt("id");
+				String name = resultSet.getString("name");
+				String job = resultSet.getString("job");
+				String address = resultSet.getString("address");
+				String birthDate = resultSet.getString("birthDate");
+				String email = resultSet.getString("email");
+				String number = resultSet.getString("number");
+				String insta = resultSet.getString("insta");
+				String github = resultSet.getString("github");
+				String aboutMe = resultSet.getString("aboutMe");
+
+
+				obj.setId(id);
+				obj.setName(name);
+				obj.setJob(job);
+				obj.setBirthDate(birthDate);
+				obj.setAddress(address);
+				obj.setEmail(email);
+				obj.setNumber(number);
+				obj.setInsta(insta);
+				obj.setGithub(github);
+				obj.setAboutMe(aboutMe);
+
+			}
+
+		} catch (SQLException e) {
+			// process sql exception
+			e.printStackTrace();
+		}
+
+		return obj;
+	}
+
 }
