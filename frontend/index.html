@@ -505,7 +505,7 @@
       //   }
       //   })
 
-
+        //TO DO!!!
       //load default user - ali
       $.ajax({
         url: "http://localhost:8081/resume-editor/getDefaultUser",
@@ -555,6 +555,8 @@
       //   console.log(queryParam);
       // };
 
+
+      //load user from query param?
       var queryParam = window.location.search.split('=')[1];
       $.ajax({
         url: "http://localhost:8081/resume-editor/getSelectedUser?user=" + queryParam,
