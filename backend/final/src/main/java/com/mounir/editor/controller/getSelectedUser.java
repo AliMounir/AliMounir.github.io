@@ -27,7 +27,10 @@ public class getSelectedUser extends HttpServlet {
 		
 		UserDao dao = new UserDao();
 		
-		String requestedId = request.getParameter("requestedId");
+		request.getQueryString();
+		String requestedId = request.getParameter("user");
+		
+		System.out.println("your requested ID "+requestedId);
 		
 		User selectedUser = dao.getSelectedUser(requestedId);
 		

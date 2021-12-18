@@ -209,13 +209,14 @@
 
     function selectedUser(userId) {
         $.ajax({
-            url: "http://localhost:8081/resume-editor/getSelectedUser",
+            url: "http://localhost:8081/resume-editor/getSelectedUser?user=" + userId,
             type: 'GET',
-            dataType: 'application/json',
-            data: { requestedId: userId},
+            // data: { requestedId: userId},
 
             success: function(data){
                 console.log("success ya basha");
+                console.log(JSON.parse(data));
+                var jcontent = JSON.parse(data);
                 window.location.href = "index.html?user=" + userId;
             },
 

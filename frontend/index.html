@@ -543,6 +543,60 @@
         }
       })
 
+      //load query param requested user
+      // document.addEventLisstener("DOMContentLoaded", function(){
+      //   var queryParam = window.location.search;
+      //   console.log(queryParam);
+
+      // });
+
+      // function () {
+      //   var queryParam = window.location.search;
+      //   console.log(queryParam);
+      // };
+
+      var queryParam = window.location.search.split('=')[1];
+      $.ajax({
+        url: "http://localhost:8081/resume-editor/getSelectedUser?user=" + queryParam,
+        type: 'GET',
+        crossDomain: true,
+        success: function(data) {
+        console.log(queryParam);
+        console.log(JSON.parse(data));
+
+        var jcontent = JSON.parse(data);
+          var newName = document.getElementById('name');
+          newName.innerHTML = "&nbsp;" + jcontent.name + "&nbsp;";
+
+          var newJob = document.getElementById('job');
+          newJob.innerHTML = "<i class='fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-blue'></i>" + jcontent.job;
+
+          var newAddress = document.getElementById('address');
+          newAddress.innerHTML = "<i class='fa fa-home fa-fw w3-margin-right w3-large w3-text-blue'></i>" + jcontent.address;
+
+          var newBirthdate = document.getElementById('birthdate');
+          newBirthdate.innerHTML = "<i class='fa fa-birthday-cake fa-fw w3-margin-right w3-large w3-text-blue'></i>" + jcontent.birthDate;
+
+          var newEmail = document.getElementById('email');
+          newEmail.innerHTML = "<i class='fa fa-envelope fa-fw w3-margin-right w3-large w3-text-blue'></i>" + jcontent.email;
+
+          var newPhone = document.getElementById('phone');
+          newPhone.innerHTML = "<i class='fa fa-phone fa-fw w3-margin-right w3-large w3-text-blue'></i>" + jcontent.phone;
+
+          var newInsta = document.getElementById('insta');
+          newInsta.innerHTML = "<i class='fa fa-instagram fa-fw w3-margin-right w3-large w3-text-blue'></i>@" + jcontent.insta;
+
+          var newGithub = document.getElementById('github');
+          newGithub.innerHTML = "<i class='fa fa-code-fork fa-fw w3-margin-right w3-large w3-text-blue'></i>github.com/" + jcontent.github;
+
+          var newAboutMe = document.getElementById('about-me-text');
+          newAboutMe.innerHTML = jcontent.aboutMe;
+        },
+        error: function() {
+          console.log("bayza ya behh");
+        }
+      });
+
 
     </script>
 
